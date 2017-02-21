@@ -10,6 +10,10 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) throws IOException {
+        //Fields
+        long sTime;
+        long eTime;
+        long tTime;
 
         //Create files
         File inputText = new File("test.txt"); //File to be compressed
@@ -24,6 +28,7 @@ public class Main {
         StringBuilder sb = new StringBuilder();
         String line;
 
+        sTime = System.currentTimeMillis();
         try {
             //Fields
             FileReader fr = new FileReader(inputText);
@@ -36,12 +41,25 @@ public class Main {
             br.close();
         } finally{}
 
+        eTime = System.currentTimeMillis();
+        tTime = eTime - sTime;
+        System.out.println("Read time: " + tTime + " ms");
+
+
         //Pass string to CodingTree (generate map of codes)
+        sTime = System.currentTimeMillis();
+
         CodingTree a = new CodingTree(sb.toString());
+
+        eTime = System.currentTimeMillis();
+        tTime = eTime - sTime;
+        System.out.println("Encode time: " + tTime + " ms");
 
         //Output codes to a text file
 
         //Write Huffman codes
+        sTime = System.currentTimeMillis();
+
         FileWriter writer = new FileWriter(codeFile);
         writer.write(a.codes.toString());
 
@@ -55,10 +73,17 @@ public class Main {
         writer.flush();
         writer.close();
 
+        eTime = System.currentTimeMillis();
+        tTime = eTime - sTime;
+        System.out.println("File write time: " + tTime + " ms");
+
         //Display the size of the compressed text, compression, and run time statistics
-        System.out.println(compressedFile.length());
-        System.out.println(codeFile.length());
-        System.out.println(inputText.length());
+        System.out.println("Original file size: " + inputText.length() + " bytes");
+        System.out.println("Compressed file size: " + compressedFile.length() + " bytes");
+        long compress = (compressedFile.length() / inputText.length()) * 100;
+        System.out.println("Compression: " + compress + "%");
+        //System.out.println(codeFile.length());
+
 
 
     }
