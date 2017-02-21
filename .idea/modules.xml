@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/DataStructures.iml" filepath="$PROJECT_DIR$/DataStructures.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hw1-BigO/hw1-BigO.iml" filepath="$PROJECT_DIR$/hw1-BigO/hw1-BigO.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p1-BurgerBaron/p1-BurgerBaron.iml" filepath="$PROJECT_DIR$/p1-BurgerBaron/p1-BurgerBaron.iml" />
+      <module fileurl="file://$PROJECT_DIR$/p2-CompressedLit/p2-CompressedLit.iml" filepath="$PROJECT_DIR$/p2-CompressedLit/p2-CompressedLit.iml" />
+    </modules>
+  </component>
+</project>
