@@ -131,11 +131,11 @@ public class CodingTree {
     private void encode() {
         for(int i = 1; i < message.length(); i++) {
             char c = message.charAt(i);
-            System.out.println("charr: " + c);
+            //System.out.println("char: " + c);
             bits += (codes.get(c));
-            bits += ". ";
+            //bits += ". ";
         }
-        System.out.println(bits);
+        //System.out.println(bits);
     }
 
     /**
