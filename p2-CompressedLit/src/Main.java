@@ -1,8 +1,4 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Created by todc on 2/18/2017.
@@ -67,11 +63,15 @@ public class Main {
         writer.close();
 
         //Write compressed file
-        writer = new FileWriter(compressedFile);
-        writer.write(a.bits);
+        FileOutputStream writer2 = new FileOutputStream(compressedFile);
+        byte[] toPrint = new byte[a.bits.size()];
+        for(int i = 0; i < a.bits.size(); i++){
+            toPrint[i] = a.bits.get(i);
+        }
+        writer2.write(toPrint);
 
-        writer.flush();
-        writer.close();
+        writer2.flush();
+        writer2.close();
 
         eTime = System.currentTimeMillis();
         tTime = eTime - sTime;
@@ -80,11 +80,15 @@ public class Main {
         //Display the size of the compressed text, compression, and run time statistics
         System.out.println("Original file size: " + inputText.length() + " bytes");
         System.out.println("Compressed file size: " + compressedFile.length() + " bytes");
-        long compress = (compressedFile.length() / inputText.length()) * 100;
+        long compress = (long)(compressedFile.length() * 1.0 / inputText.length() * 100);
         System.out.println("Compression: " + compress + "%");
         //System.out.println(codeFile.length());
 
 
 
     }
+
+//    private List<Bytes> byteConvert(String a) {
+//
+//    }
 }

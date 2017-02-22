@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.TreeMap;
@@ -28,7 +30,7 @@ public class CodingTree {
      * Public message encoded using Huffman codes
      * public String bits or public List<Byte> bits
      */
-    public String bits;
+    public List<Byte> bits;
 
     /**
      * Constructor that takes a string to be compressed
@@ -42,6 +44,7 @@ public class CodingTree {
         count = new TreeMap<>();
         codes = new TreeMap<>();
         tree = new PriorityQueue<>();
+        bits = new ArrayList<>();
 
         //Execute algorithm
         charCount(message); //Counts character occurrences
@@ -60,7 +63,7 @@ public class CodingTree {
         char c;
 
         //Get each character, add to map
-        for(int i = 1; i < message.length(); i++) {
+        for(int i = 0; i < message.length(); i++) {
             c = message.charAt(i);
             //Add to map
             if(count.containsKey(c)) {
@@ -132,12 +135,24 @@ public class CodingTree {
         //Fields
         StringBuilder sb = new StringBuilder();
 
-        for(int i = 1; i < message.length(); i++) {
+        for(int i = 0; i < message.length(); i++) {
             char c = message.charAt(i);
             //System.out.println("char: " + c);
             sb.append(codes.get(c));
         }
-        bits = sb.toString();
+
+        int j;
+        for(j = 0; j < sb.length() - 8; j += 8) {
+            String a = (sb.subSequence(j, j + 8).toString());
+            byte b = (byte)Integer.parseInt(a, 2);
+            bits.add(b);
+        }
+        String lastBits = sb.substring(j - 8);
+        while(lastBits.length() < 8){
+            lastBits = lastBits + "0";
+        }
+        bits.add((byte)Integer.parseInt(lastBits, 2));
+
         //System.out.println(bits);
     }
 
