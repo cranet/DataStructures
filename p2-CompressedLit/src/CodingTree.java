@@ -129,12 +129,15 @@ public class CodingTree {
      *  Builds compressed encoding of the message
      */
     private void encode() {
+        //Fields
+        StringBuilder sb = new StringBuilder();
+
         for(int i = 1; i < message.length(); i++) {
             char c = message.charAt(i);
             //System.out.println("char: " + c);
-            bits += (codes.get(c));
-            //bits += ". ";
+            sb.append(codes.get(c));
         }
+        bits = sb.toString();
         //System.out.println(bits);
     }
 
