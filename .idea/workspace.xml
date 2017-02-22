@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f19f8b16-6d39-4f23-b183-fc1f97051a48" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/codes.txt" afterPath="$PROJECT_DIR$/codes.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/compressed.txt" afterPath="$PROJECT_DIR$/compressed.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/p2-CompressedLit/CodingTree$Node.class" afterPath="$PROJECT_DIR$/out/production/p2-CompressedLit/CodingTree$Node.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/p2-CompressedLit/CodingTree.class" afterPath="$PROJECT_DIR$/out/production/p2-CompressedLit/CodingTree.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/p2-CompressedLit/Main.class" afterPath="$PROJECT_DIR$/out/production/p2-CompressedLit/Main.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/p2-CompressedLit/src/CodingTree.java" afterPath="$PROJECT_DIR$/p2-CompressedLit/src/CodingTree.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/p2-CompressedLit/src/Main.java" afterPath="$PROJECT_DIR$/p2-CompressedLit/src/Main.java" />
     </list>
@@ -27,8 +29,8 @@
       <file leaf-file-name="CodingTree.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/p2-CompressedLit/src/CodingTree.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="147" column="24" lean-forward="true" selection-start-line="147" selection-start-column="24" selection-end-line="147" selection-end-column="24" />
+            <state relative-caret-position="3433">
+              <caret line="216" column="40" lean-forward="true" selection-start-line="216" selection-start-column="40" selection-end-line="216" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -39,8 +41,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/p2-CompressedLit/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="703">
-              <caret line="82" column="87" lean-forward="false" selection-start-line="82" selection-start-column="87" selection-end-line="82" selection-end-column="87" />
+            <state relative-caret-position="665">
+              <caret line="85" column="0" lean-forward="true" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -608,7 +610,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298466" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39260808" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39260808" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298466" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32986832" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -971,16 +973,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/p2-CompressedLit/src/CodingTree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="147" column="24" lean-forward="true" selection-start-line="147" selection-start-column="24" selection-end-line="147" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/compressed.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -997,10 +989,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/p2-CompressedLit/src/CodingTree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3433">
+          <caret line="216" column="40" lean-forward="true" selection-start-line="216" selection-start-column="40" selection-end-line="216" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/p2-CompressedLit/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="703">
-          <caret line="82" column="87" lean-forward="false" selection-start-line="82" selection-start-column="87" selection-end-line="82" selection-end-column="87" />
+        <state relative-caret-position="665">
+          <caret line="85" column="0" lean-forward="true" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
           <folding />
         </state>
       </provider>

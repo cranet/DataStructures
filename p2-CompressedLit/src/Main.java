@@ -49,7 +49,7 @@ public class Main {
 
         eTime = System.currentTimeMillis();
         tTime = eTime - sTime;
-        System.out.println("Encode time: " + tTime + " ms");
+        System.out.println("Compress time: " + tTime + " ms");
 
         //Output codes to a text file
 
@@ -84,11 +84,5 @@ public class Main {
         System.out.println("Compression: " + compress + "%");
         //System.out.println(codeFile.length());
 
-
-
     }
-
-//    private List<Bytes> byteConvert(String a) {
-//
-//    }
 }

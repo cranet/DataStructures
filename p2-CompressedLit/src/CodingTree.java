@@ -49,7 +49,7 @@ public class CodingTree {
         //Execute algorithm
         charCount(message); //Counts character occurrences
         buildTree(); //Build priority queue tree
-        merge(); //Merge into Huffman tree, create codes
+        merge(); //Merge into Huffman tree, create binary codes
         encode(); //Create compressed encoding
     }
 
@@ -135,25 +135,26 @@ public class CodingTree {
         //Fields
         StringBuilder sb = new StringBuilder();
 
+        //Convert characters to bytes using codes
         for(int i = 0; i < message.length(); i++) {
             char c = message.charAt(i);
-            //System.out.println("char: " + c);
             sb.append(codes.get(c));
         }
 
+        //Put 8 bytes at a time into byte array
         int j;
         for(j = 0; j < sb.length() - 8; j += 8) {
-            String a = (sb.subSequence(j, j + 8).toString());
-            byte b = (byte)Integer.parseInt(a, 2);
+            String s = (sb.subSequence(j, j + 8).toString());
+            byte b = (byte)Integer.parseInt(s, 2);
             bits.add(b);
         }
+
+        //Fencepost
         String lastBits = sb.substring(j - 8);
         while(lastBits.length() < 8){
             lastBits = lastBits + "0";
         }
         bits.add((byte)Integer.parseInt(lastBits, 2));
-
-        //System.out.println(bits);
     }
 
     /**
@@ -214,13 +215,10 @@ public class CodingTree {
         public int compareTo(Object o) {
             Node n = (Node) o;
             if(weight > n.getWeight()) {
-                //System.out.println(weight + " < " +n.getWeight());
                 return 1;
             } else if(weight < n.getWeight()) {
-                //System.out.println(weight + " > " +n.getWeight());
                 return -1;
             } else {
-                //System.out.println(weight + " = " +n.getWeight());
                 return 0;
             }
         }
