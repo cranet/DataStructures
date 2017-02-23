@@ -12,7 +12,7 @@ public class Main {
         long tTime;
 
         //Create files
-        File inputText = new File("WarAndPeace.txt"); //File to be compressed
+        File inputText = new File("test.txt"); //File to be compressed
 
         File codeFile = new File("codes.txt"); //File to store Huffman codes
         codeFile.createNewFile();

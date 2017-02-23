@@ -141,16 +141,26 @@ public class CodingTree {
             sb.append(codes.get(c));
         }
 
-        //Put 8 bytes at a time into byte array
-        int j;
-        for(j = 0; j < sb.length() - 8; j += 8) {
-            String s = (sb.subSequence(j, j + 8).toString());
-            byte b = (byte)Integer.parseInt(s, 2);
+        int countE; //Counting segments
+        int block = 8; //Block of 8
+        if(sb.length() < 8) {
+            countE = sb.length();
+            block = 0;
+            byte b = (byte) Integer.parseInt(sb.toString(), 2);
             bits.add(b);
+            System.out.println("check");
+        } else {
+            //Put 8 bytes at a time into byte array
+
+            for (countE = 0; countE < sb.length() - block; countE += block) {
+                String s = (sb.subSequence(countE, countE + 8).toString());
+                byte b = (byte) Integer.parseInt(s, 2);
+                bits.add(b);
+            }
         }
 
         //Fencepost
-        String lastBits = sb.substring(j - 8);
+        String lastBits = sb.substring(countE - block);
         while(lastBits.length() < 8){
             lastBits = lastBits + "0";
         }
