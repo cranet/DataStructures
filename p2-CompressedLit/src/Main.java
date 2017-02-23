@@ -12,7 +12,7 @@ public class Main {
         long tTime;
 
         //Create files
-        File inputText = new File("test.txt"); //File to be compressed
+        File inputText = new File("WarAndPeace.txt"); //File to be compressed
 
         File codeFile = new File("codes.txt"); //File to store Huffman codes
         codeFile.createNewFile();
@@ -83,6 +83,58 @@ public class Main {
         long compress = (long)(compressedFile.length() * 1.0 / inputText.length() * 100);
         System.out.println("Compression: " + compress + "%");
         //System.out.println(codeFile.length());
+
+        //Testing
+        check();
+
+    }
+
+    private static void check() throws IOException {
+
+        File myCodes = new File("codes.txt"); //Final compressed file
+        myCodes.createNewFile();
+
+        File givenCodes = new File("codes_given.txt");
+        givenCodes.createNewFile();
+
+        //Read contents of inputText file into a string
+        //My codes
+        try {
+            //Fields
+            FileReader fr = new FileReader(myCodes);
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+
+            int myCount = 0;
+            while((line = br.readLine()) != null) {
+                for(int i = 0; i < line.length(); i++) {
+                    if(line.charAt(i) == '=') {
+                        myCount++;
+                    }
+                }
+            }
+            System.out.println("my count: " + myCount);
+            br.close();
+        } finally{}
+
+        //Given codes
+        try {
+            //Fields
+            FileReader fr = new FileReader(givenCodes);
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+
+            int myCount = 0;
+            while((line = br.readLine()) != null) {
+                for(int i = 0; i < line.length(); i++) {
+                    if(line.charAt(i) == '=') {
+                        myCount++;
+                    }
+                }
+            }
+            System.out.println("given count: " + myCount);
+            br.close();
+        } finally{}
 
     }
 }
