@@ -78,6 +78,10 @@ public class CodingTree {
      * Builds a priority queue tree using the count map
      */
     private void buildTree() {
+        //Add root
+        //Node root = new Node(0, null, null);
+        //tree.add(root);
+
         for(Map.Entry<Character, Integer> entry : count.entrySet()) {
             Node n = new Node(entry.getKey(), entry.getValue());
             tree.add(n);
@@ -96,7 +100,8 @@ public class CodingTree {
         Add back to priority queue
         Repeat until a single Huffman tree remains
          */
-        while(tree.size() > 1) {
+        while(tree.size() > 2) {
+            //System.out.println(tree.size());
             Node left = tree.poll();
             Node right = tree.poll();
             int weight = left.getWeight() + right.getWeight();
@@ -104,11 +109,25 @@ public class CodingTree {
             tree.add(parent);
         }
 
+        //
+
         //Add root to tree
-        Node n = tree.poll();
+        Node root;
+        Node left = tree.poll();
+        int weight = left.getWeight();
+        //System.out.println(tree.size());
+        if(tree.peek() != null) {
+            //System.out.println(tree.peek().getData());
+            Node right = tree.poll();
+            weight += right.getWeight();
+            root = new Node(weight, left, right);
+        } else {
+            root = new Node(weight, left, null);
+        }
+        
         String b = "";
         //Call binary
-        binary(n, b);
+        binary(root, b);
     }
 
     /**
@@ -148,7 +167,7 @@ public class CodingTree {
             block = 0;
             byte b = (byte) Integer.parseInt(sb.toString(), 2);
             bits.add(b);
-            System.out.println("check");
+            //System.out.println("check");
         } else {
             //Put 8 bytes at a time into byte array
 
@@ -164,7 +183,7 @@ public class CodingTree {
         while(lastBits.length() < 8){
             lastBits = lastBits + "0";
         }
-        bits.add((byte)Integer.parseInt(lastBits, 2));
+        //bits.add((byte)Integer.parseInt(lastBits, 2));
     }
 
     /**

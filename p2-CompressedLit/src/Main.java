@@ -42,7 +42,7 @@ public class Main {
 
             while((line = br.readLine()) != null) {
                 sb.append(line);
-                sb.append((char) 10); //Account for lines
+                //sb.append((char) 10); //Account for lines
             }
             br.close();
         } finally{}
@@ -54,6 +54,9 @@ public class Main {
 
         //Pass string to CodingTree (generate map of codes)
         sTime = System.currentTimeMillis();
+
+        //Test string
+        String testa = "a";
 
         CodingTree a = new CodingTree(sb.toString());
 
@@ -95,7 +98,7 @@ public class Main {
         //System.out.println(codeFile.length());
 
         //Testing
-        //check();
+        check();
 
     }
 
