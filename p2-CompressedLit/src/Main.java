@@ -22,7 +22,7 @@ public class Main {
         long tTime;
 
         //Create files
-        File inputText = new File("WarAndPeace.txt"); //File to be compressed
+        File inputText = new File("TheCountOfMonteCristo.txt"); //File to be compressed
 
         File codeFile = new File("codes.txt"); //File to store Huffman codes
         codeFile.createNewFile();
@@ -32,7 +32,7 @@ public class Main {
 
         //Read contents of inputText file into a string
         StringBuilder sb = new StringBuilder();
-        String line;
+        int ch;
 
         sTime = System.currentTimeMillis();
         try {
@@ -40,9 +40,9 @@ public class Main {
             FileReader fr = new FileReader(inputText);
             BufferedReader br = new BufferedReader(fr);
 
-            while((line = br.readLine()) != null) {
-                sb.append(line);
-                //sb.append((char) 10); //Account for lines
+            while((ch = br.read()) != -1) {
+                char character = (char) ch;
+                sb.append(character);
             }
             br.close();
         } finally{}
@@ -56,7 +56,7 @@ public class Main {
         sTime = System.currentTimeMillis();
 
         //Test string
-        String testa = "a";
+        //String testa = "a";
 
         CodingTree a = new CodingTree(sb.toString());
 
@@ -98,7 +98,7 @@ public class Main {
         //System.out.println(codeFile.length());
 
         //Testing
-        check();
+        //check();
 
     }
 

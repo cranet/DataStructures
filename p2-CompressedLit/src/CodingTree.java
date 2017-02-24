@@ -78,10 +78,6 @@ public class CodingTree {
      * Builds a priority queue tree using the count map
      */
     private void buildTree() {
-        //Add root
-        //Node root = new Node(0, null, null);
-        //tree.add(root);
-
         for(Map.Entry<Character, Integer> entry : count.entrySet()) {
             Node n = new Node(entry.getKey(), entry.getValue());
             tree.add(n);
@@ -101,7 +97,6 @@ public class CodingTree {
         Repeat until a single Huffman tree remains
          */
         while(tree.size() > 2) {
-            //System.out.println(tree.size());
             Node left = tree.poll();
             Node right = tree.poll();
             int weight = left.getWeight() + right.getWeight();
@@ -109,15 +104,12 @@ public class CodingTree {
             tree.add(parent);
         }
 
-        //
-
-        //Add root to tree
+        //Add root to tree (fencepost)
         Node root;
         Node left = tree.poll();
         int weight = left.getWeight();
-        //System.out.println(tree.size());
+
         if(tree.peek() != null) {
-            //System.out.println(tree.peek().getData());
             Node right = tree.poll();
             weight += right.getWeight();
             root = new Node(weight, left, right);
@@ -177,13 +169,6 @@ public class CodingTree {
                 bits.add(b);
             }
         }
-
-        //Fencepost
-        String lastBits = sb.substring(countE - block);
-        while(lastBits.length() < 8){
-            lastBits = lastBits + "0";
-        }
-        //bits.add((byte)Integer.parseInt(lastBits, 2));
     }
 
     /**
