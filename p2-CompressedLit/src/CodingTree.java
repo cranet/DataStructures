@@ -167,15 +167,6 @@ public class CodingTree {
         bits.add((byte)Integer.parseInt(lastBits, 2));
     }
 
-    private void decode() {
-        StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < bits.size(); i++) {
-            StringBuilder check = new StringBuilder();
-            check.append(bits.get(i));
-            //if(check == codes.)
-        }
-    }
-
     /**
      * Node class
      * Holds character data and weight (number of occurrences)

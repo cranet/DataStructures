@@ -1,7 +1,17 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
- * Created by todc on 2/18/2017.
+ * Main class calls CodingTree to execute Huffman algorithm
+ * Displays read and compression times, and compression percent
+ *
+ * @author Todd Crane (cranet@uw.edu)
+ * @author Caleb Smith (caleb447@uw.edu)
+ * @version 2/24/2017.
  */
 public class Main {
 
@@ -12,7 +22,7 @@ public class Main {
         long tTime;
 
         //Create files
-        File inputText = new File("anna.txt"); //File to be compressed
+        File inputText = new File("WarAndPeace.txt"); //File to be compressed
 
         File codeFile = new File("codes.txt"); //File to store Huffman codes
         codeFile.createNewFile();
@@ -85,10 +95,14 @@ public class Main {
         //System.out.println(codeFile.length());
 
         //Testing
-        check();
+        //check();
 
     }
 
+    /**
+     * Test method to compare the compression of two files
+     * @throws IOException
+     */
     private static void check() throws IOException {
 
         File myCodes = new File("codes.txt"); //Final compressed file
