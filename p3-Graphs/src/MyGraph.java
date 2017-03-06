@@ -40,6 +40,11 @@ public class MyGraph implements Graph {
         //Build adacjent map
         buildMap();
 
+        //TEST
+        for(Vertex vtest : vertex) {
+            //System.out.println("vtes t   : " + vtest);
+            //System.out.println(adjacentVertices(vtest));
+        }
 
 	}
 
@@ -131,7 +136,8 @@ public class MyGraph implements Graph {
 
         for(Edge e : edge) {
             if(e.getDestination().equals(v)) {
-                temp.add(e.getDestination());
+                //System.out.prin
+                temp.add(e.getSource());
             }
         }
 
@@ -155,8 +161,13 @@ public class MyGraph implements Graph {
 	public int edgeCost(Vertex a, Vertex b) {
 
 		// YOUR CODE HERE
+        for(Edge e : edge) {
+            if(e.getSource().equals(a) && e.getDestination().equals(b)) {
+                return e.getWeight();
+            }
+        }
 
-        return 0;
+        return -1;
 	}
 
 	/**
