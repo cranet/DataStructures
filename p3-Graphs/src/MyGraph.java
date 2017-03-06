@@ -203,7 +203,24 @@ public class MyGraph implements Graph {
         appear on the path.
          */
 
-        
+        //Unvisited vertices
+        PriorityQueue<Vertex> pq = new PriorityQueue<>();
+        //Temp set
+        Collection<Vertex> temp = new HashSet<>();
+
+        //Set source cost to 0, add to set
+        a.setCost(0);
+        temp.add(a);
+
+        for(Map.Entry<Vertex, Set<Edge>> entry : map.entrySet()) {
+            while(!entry.getKey().getKnown()) {
+                //System.out.println(entry.getValue());
+                for(Edge e : entry.getValue()) {
+                    //e.
+                }
+            }
+        }
+
 
         return null;
 	}
