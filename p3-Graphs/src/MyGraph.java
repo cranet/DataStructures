@@ -9,7 +9,8 @@ public class MyGraph implements Graph {
 	// you are also likely to want some private helper methods
 
 	// YOUR CODE HERE
-	//private HashMap<Vertex, Edge> graph;
+    //private Set<Edge> edges;
+	private HashMap<Vertex, Set<Edge>> map;
 	private Collection<Vertex> vertex;
 	private Collection<Edge> edge;
 
@@ -29,10 +30,15 @@ public class MyGraph implements Graph {
         //System.out.println(e);
         vertex = v;
         edge = e;
+        map = new HashMap<>();
+        //edges = new HashSet<>();
         //graph = new HashMap<>();
 
         //Call helper method to check edges
         checkEdges();
+
+        //Build adacjent map
+        buildMap();
 
 
 	}
@@ -50,7 +56,30 @@ public class MyGraph implements Graph {
             if (e.getWeight() < 0) {
                 throw new IllegalArgumentException();
             }
+
+            //Check for wrong edge
+            for(Edge e2 : edge) {
+                if(e.getSource().equals(e2.getSource()) && e.getDestination().equals(e2.getDestination())) {
+                    if(e.getWeight() != e2.getWeight()) {
+                        throw new IllegalArgumentException();
+                    }
+                }
+            }
         }
+    }
+
+    private void buildMap() {
+        for(Vertex v : vertex) {
+            Set<Edge> edges = new HashSet<>();
+            for(Edge e : edge) {
+                if(e.getDestination().equals(v)) {
+                    edges.add(e);
+                }
+            }
+            map.put(v, edges);
+        }
+
+        //System.out.println(map.toString());
     }
 
 	/**
@@ -63,7 +92,7 @@ public class MyGraph implements Graph {
 
 		// YOUR CODE HERE
 
-        return null;
+        return vertex;
 
 	}
 
@@ -77,7 +106,7 @@ public class MyGraph implements Graph {
 
 		// YOUR CODE HERE
 
-        return null;
+        return edge;
 
 	}
 
@@ -95,9 +124,18 @@ public class MyGraph implements Graph {
 	@Override
 	public Collection<Vertex> adjacentVertices(Vertex v) {
 
-		// YOUR CODE HERE
 
-        return null;
+		// YOUR CODE HERE
+        Collection<Vertex> temp = new HashSet<>();
+        //for(Map.Entry<Vertex, Edge> entry : map.entrySet())
+
+        for(Edge e : edge) {
+            if(e.getDestination().equals(v)) {
+                temp.add(e.getDestination());
+            }
+        }
+
+        return temp;
 	}
 
 	/**
