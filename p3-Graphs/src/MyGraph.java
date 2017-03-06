@@ -9,6 +9,9 @@ public class MyGraph implements Graph {
 	// you are also likely to want some private helper methods
 
 	// YOUR CODE HERE
+	//private HashMap<Vertex, Edge> graph;
+	private Collection<Vertex> vertex;
+	private Collection<Edge> edge;
 
 	/**
 	 * Creates a MyGraph object with the given collection of vertices and the
@@ -22,8 +25,21 @@ public class MyGraph implements Graph {
 	public MyGraph(Collection<Vertex> v, Collection<Edge> e) {
 
 		// YOUR CODE HERE
+        //System.out.println(v);
+        //System.out.println(e);
+        vertex = v;
+        edge = e;
+        //graph = new HashMap<>();
+
+        //Call helper method to build graph
+        buildGraph();
 
 	}
+
+	private void buildGraph() {
+
+
+    }
 
 	/**
 	 * Return the collection of vertices of this graph
@@ -34,6 +50,8 @@ public class MyGraph implements Graph {
 	public Collection<Vertex> vertices() {
 
 		// YOUR CODE HERE
+
+        return null;
 
 	}
 
@@ -46,6 +64,8 @@ public class MyGraph implements Graph {
 	public Collection<Edge> edges() {
 
 		// YOUR CODE HERE
+
+        return null;
 
 	}
 
@@ -65,6 +85,7 @@ public class MyGraph implements Graph {
 
 		// YOUR CODE HERE
 
+        return null;
 	}
 
 	/**
@@ -85,6 +106,7 @@ public class MyGraph implements Graph {
 
 		// YOUR CODE HERE
 
+        return 0;
 	}
 
 	/**
@@ -107,6 +129,7 @@ public class MyGraph implements Graph {
 		// YOUR CODE HERE (you might comment this out this method while doing
 		// Part 1)
 
+        return null;
 	}
 
 }
