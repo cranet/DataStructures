@@ -37,7 +37,7 @@ public class MyGraph implements Graph {
         //Call helper method to check edges
         checkEdges();
 
-        //Build adacjent map
+        //Build adjacent map
         buildMap();
 
         //TEST
@@ -48,12 +48,16 @@ public class MyGraph implements Graph {
 
 	}
 
+    /**
+     * Checks that all edges connect to vertices in the graph
+     * Checks for negative edge weights
+     * Checks for repeated directed edges with different weights
+     */
 	private void checkEdges() {
 
         for(Edge e : edge) {
-            //Check that all edges connect to existing verticies
+            //Check that all edges connect to existing vertices
             if(!vertex.contains(e.getSource()) || !vertex.contains(e.getDestination())) {
-
                 throw new NoSuchElementException();
             }
 
@@ -62,7 +66,7 @@ public class MyGraph implements Graph {
                 throw new IllegalArgumentException();
             }
 
-            //Check for wrong edge
+            //Check for repeated directed edges with different weights
             for(Edge e2 : edge) {
                 if(e.getSource().equals(e2.getSource()) && e.getDestination().equals(e2.getDestination())) {
                     if(e.getWeight() != e2.getWeight()) {
@@ -73,6 +77,10 @@ public class MyGraph implements Graph {
         }
     }
 
+    /**
+     * Builds the graph using a HashMap
+     * Keys = Vertices, Values = HashSet of connected edges
+     */
     private void buildMap() {
         for(Vertex v : vertex) {
             Set<Edge> edges = new HashSet<>();
@@ -83,7 +91,6 @@ public class MyGraph implements Graph {
             }
             map.put(v, edges);
         }
-
         //System.out.println(map.toString());
     }
 
@@ -136,7 +143,6 @@ public class MyGraph implements Graph {
 
         for(Edge e : edge) {
             if(e.getDestination().equals(v)) {
-                //System.out.prin
                 temp.add(e.getSource());
             }
         }
@@ -166,7 +172,6 @@ public class MyGraph implements Graph {
                 return e.getWeight();
             }
         }
-
         return -1;
 	}
 
@@ -189,6 +194,16 @@ public class MyGraph implements Graph {
 
 		// YOUR CODE HERE (you might comment this out this method while doing
 		// Part 1)
+
+        //If no path return null
+        //If start and end vertex are equal, return path with one vertex and cost of 0
+        /*
+        Otherwise, the path will contain at least two vertices -- the start and end vertices and any
+        other vertices along the lowest-cost path. The vertices should be in the order they
+        appear on the path.
+         */
+
+        
 
         return null;
 	}
