@@ -31,14 +31,26 @@ public class MyGraph implements Graph {
         edge = e;
         //graph = new HashMap<>();
 
-        //Call helper method to build graph
-        buildGraph();
+        //Call helper method to check edges
+        checkEdges();
+
 
 	}
 
-	private void buildGraph() {
+	private void checkEdges() {
 
+        for(Edge e : edge) {
+            //Check that all edges connect to existing verticies
+            if(!vertex.contains(e.getSource()) || !vertex.contains(e.getDestination())) {
 
+                throw new NoSuchElementException();
+            }
+
+            //Check for negative weight
+            if (e.getWeight() < 0) {
+                throw new IllegalArgumentException();
+            }
+        }
     }
 
 	/**
