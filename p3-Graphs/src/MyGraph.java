@@ -1,3 +1,4 @@
+import java.awt.datatransfer.SystemFlavorMap;
 import java.util.*;
 
 /**
@@ -216,16 +217,25 @@ public class MyGraph implements Graph {
 
             int tempCost = Integer.MAX_VALUE;
             for(Map.Entry<Vertex, Set<Edge>> entry : map.entrySet()) {
+                System.out.println(entry.getKey() + " " + entry.getKey().getKnown());
                 if (entry.getKey().getCost() < tempCost && !entry.getKey().getKnown()) {
                     tempCost = entry.getKey().getCost();
                     current = entry.getKey();
+                    //entry.se
+                    //entry.getKey().setKnown(true);
                 }
 
                 //System.out.println("Entry cost: " + entry.getKey().getCost());
             }
             System.out.println("Current: " + current + ", Cost: " + current.getCost());
 
-            current.setKnown(true);
+//            current.setKnown(true);
+            tempKey = current;
+            tempValue = map.get(current);
+            tempKey.setKnown(true);
+            map.remove(current);
+            map.put(tempKey, tempValue);
+            current = tempKey;
 
             for(Edge e : map.get(current)) {
                 //System.out.println(e.getSource() + " " + e.getDestination());
