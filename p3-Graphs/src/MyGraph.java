@@ -41,10 +41,10 @@ public class MyGraph implements Graph {
         buildMap();
 
         //TEST
-        for(Vertex vtest : vertex) {
+        //for(Vertex vtest : vertex) {
             //System.out.println("vtes t   : " + vtest);
             //System.out.println(adjacentVertices(vtest));
-        }
+        //}
 
 	}
 
@@ -85,13 +85,13 @@ public class MyGraph implements Graph {
         for(Vertex v : vertex) {
             Set<Edge> edges = new HashSet<>();
             for(Edge e : edge) {
-                if(e.getDestination().equals(v)) {
+                if(e.getSource().equals(v)) {
                     edges.add(e);
                 }
             }
             map.put(v, edges);
         }
-        //System.out.println(map.toString());
+        System.out.println(map.toString());
     }
 
 	/**
@@ -203,6 +203,63 @@ public class MyGraph implements Graph {
         appear on the path.
          */
 
+
+        //Graph = map
+        Vertex current = a;
+        Vertex tempKey = current;
+        Set<Edge> tempValue = map.get(current);
+        tempKey.setCost(0);
+        map.remove(current);
+        map.put(tempKey, tempValue);
+
+        while(!current.equals(b)) {
+
+            int tempCost = Integer.MAX_VALUE;
+            for(Map.Entry<Vertex, Set<Edge>> entry : map.entrySet()) {
+                if (entry.getKey().getCost() < tempCost && !entry.getKey().getKnown()) {
+                    tempCost = entry.getKey().getCost();
+                    current = entry.getKey();
+                }
+
+                //System.out.println("Entry cost: " + entry.getKey().getCost());
+            }
+            System.out.println("Current: " + current + ", Cost: " + current.getCost());
+
+            current.setKnown(true);
+
+            for(Edge e : map.get(current)) {
+                //System.out.println(e.getSource() + " " + e.getDestination());
+                if(!e.getDestination().getKnown()) {
+
+                    if(current.getCost() + e.getWeight() < e.getDestination().getCost()) {
+
+                        tempKey = e.getDestination();
+                        tempValue = map.get(e.getDestination());
+                        tempKey.setCost(current.getCost() + e.getWeight());
+                        map.remove(e.getDestination());
+                        map.put(tempKey, tempValue);
+                        //System.out.print(current + "->");
+                    }
+                }
+            }
+        }
+
+        /*
+        while(not all nodes are known) {
+            b = find unknown node with smallest cost
+            b.known = true
+            for each edge (b,a) in G
+            if(!a.known)
+                if(b.cost + weight((b,a)) < a.cost){
+                a.cost = b.cost + weight((b,a))
+                a.path = b
+            }
+        }
+        /*
+
+
+        /*
+
         //Unvisited vertices
         PriorityQueue<Vertex> pq = new PriorityQueue<>();
         //Temp set
@@ -214,12 +271,21 @@ public class MyGraph implements Graph {
 
         for(Map.Entry<Vertex, Set<Edge>> entry : map.entrySet()) {
             while(!entry.getKey().getKnown()) {
-                //System.out.println(entry.getValue());
+                System.out.println("entry value" + entry.getValue());
+                Edge nextNode = null;
+                int weight = Integer.MAX_VALUE;
                 for(Edge e : entry.getValue()) {
-                    //e.
+                    if(weight > e.getWeight()) {
+                        weight = e.getWeight();
+                        nextNode = e;
+                    }
                 }
+                System.out.println("lowest weight: " + weight);
+                nextNode.getSource().setKnown(true);
             }
+
         }
+        */
 
 
         return null;
