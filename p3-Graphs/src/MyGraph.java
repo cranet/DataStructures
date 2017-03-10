@@ -17,6 +17,8 @@ public class MyGraph implements Graph {
 	// YOUR CODE HERE
     //private Set<Edge> edges;
 	private HashMap<Vertex, Set<Edge>> map;
+	private HashMap<String, Vertex> vertMap;
+	private HashMap<String, Set<Edge>> edgeMap;
 	private Collection<Vertex> vertex;
 	private Collection<Edge> edge;
 
@@ -37,6 +39,9 @@ public class MyGraph implements Graph {
         vertex = v;
         edge = e;
         map = new HashMap<>();
+        vertMap = new HashMap<>();
+        edgeMap = new HashMap<>();
+
         //edges = new HashSet<>();
         //graph = new HashMap<>();
 
@@ -95,7 +100,10 @@ public class MyGraph implements Graph {
                     edges.add(e);
                 }
             }
+            vertMap.put(v.getLabel(), v);
+            edgeMap.put(v.getLabel(), edges);
             map.put(v, edges);
+
         }
         System.out.println(map.toString());
     }
@@ -213,17 +221,19 @@ public class MyGraph implements Graph {
         /////////////
 
         //Known vertices
-        Set<Vertex> known = new HashSet<>();
+        //Map<String, Set<Edge>> known = new HashMap<>();
 
         //Unknown vertices
-        Set<Vertex> unknown = new HashSet<>();
+        //Set<Vertex> unknown = new HashSet<>();
 
-        //Set infinity and false
-        for(Vertex v : map.keySet()) {
-            v.setCost(Integer.MAX_VALUE);
-            v.setKnown(false);
-            unknown.add(v);
-        }
+//        //Set infinity and false
+//        for(Vertex v : map.keySet()) {
+//            v.setCost(Integer.MAX_VALUE);
+//            v.setKnown(false);
+//            unknown.add(v);
+//        }
+
+        //Set source cost to zero
         a.setCost(0);
 
         //Edges
@@ -241,47 +251,63 @@ public class MyGraph implements Graph {
 
 
         //Go through all vertices
+        Vertex current = a;
+
         while(!unknown.isEmpty()) {
+
+            System.out.println("current: " + current.toString());
+            System.out.println("current cost: " + current.getCost());
 
 
             //Find vertex with lowest cost
-            int distance = Integer.MAX_VALUE;
-            Vertex current = a;
+            int tempCost = Integer.MAX_VALUE;
+
 
             for(Vertex v : unknown) {
                 //System.out.println("d: " + distance + " cost: " + v.getCost());
-                if(distance > v.getCost()) {
-                    distance = v.getCost();
+                if(v.getCost() < tempCost) {
+                    tempCost = v.getCost();
                     current = v;
                 }
             }
 
             //Remove from unknown
+            known.add(current);
             unknown.remove(current);
             //System.out.println(current.toString());
 
             //Find shortest path from current
             int temp = Integer.MAX_VALUE;
             for(Edge e : edges) {
-                System.out.println("Label: " + current.getLabel());
-                System.out.println("temp source: " + e.getSource());
-                System.out.println();
+
+//                System.out.println("Label: " + current.getLabel());
+//                System.out.println("temp source: " + e.getSource());
+//                System.out.println();
 
                 //Check for correct source
-                if(e.getSource().toString().equals(current.getLabel())) {
-                    //Get shortest weight
-                    if(e.getWeight() < temp) {
-                        temp = e.getWeight();
-                        //System.out.println("weight: " + temp);
+                //if(e.getSource().toString().equals(current.getLabel())) {
+                if(e.getSource().equals(current)) {
+
+                    System.out.println("TRUE");
+
+                    //Setting cost if less than previous cost
+                    if(e.getDestination().getCost() > current.getCost() + e.getWeight()) {
+
+                        e.getDestination().setCost(current.getCost() + e.getWeight());
                     }
+                    //Get shortest weight
+//                    if(e.getWeight() < temp) {
+//                        temp = e.getWeight();
+//                        //System.out.println("weight: " + temp);
+//                    }
                 }
                 //Set cost of current vertex
                 System.out.println("current cost: " + current.getCost());
-                current.setCost(temp);
+                //current.setCost(temp);
             }
 
             //Add vertex to known
-            known.add(current);
+            //known.add(current);
 
             //Check correct cost
             for(Vertex v : known) {
