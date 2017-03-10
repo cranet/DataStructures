@@ -225,11 +225,19 @@ public class MyGraph implements Graph {
 
         //Edges
         //System.out.println(map.values().toString());
-        Set<Set<Edge>> edges = new HashSet<>();
-        for(Set<Edge> e : map.values()) {
-            edges.add(e);
+        Set<Edge> edges = new HashSet<>();
+        //List<Edge> edges = new ArrayList<>();
+        for(Set<Edge> setE : map.values()) {
+            for(Edge e : setE) {
+                edges.add(e);
+            }
         }
 
+
+        System.out.println(edges.toString());
+
+
+        //Go through all vertices
         while(!unknown.isEmpty()) {
 
 
@@ -249,9 +257,19 @@ public class MyGraph implements Graph {
             unknown.remove(current);
             //System.out.println(current.toString());
 
-            for(Set<Edge> e : edges) {
-                if(e.contains(current.getLabel())) {
-                    System.out.println("LABEL : " + current.getLabel());
+            //Find shortest path from current
+            for(Edge e : edges) {
+                int temp = Integer.MAX_VALUE;
+                System.out.println("Label: " + current.getLabel());
+                System.out.println("temp source: " + e.getSource());
+                System.out.println();
+
+                //Check for correct source
+                if(e.getSource().toString().equals(current.getLabel())) {
+                    //Check weight
+                    if(e.getWeight() < temp) {
+                        temp = e.getWeight();
+                    }
                 }
             }
         }
