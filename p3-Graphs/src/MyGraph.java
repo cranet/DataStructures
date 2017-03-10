@@ -1,5 +1,10 @@
-import java.awt.datatransfer.SystemFlavorMap;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Set;
 
 /**
  * A representation of a graph. Assumes that we do not have negative cost edges
@@ -193,8 +198,8 @@ public class MyGraph implements Graph {
 	 */
 	public Path shortestPath(Vertex a, Vertex b) {
 
-		// YOUR CODE HERE (you might comment this out this method while doing
-		// Part 1)
+        // YOUR CODE HERE (you might comment this out this method while doing
+        // Part 1)
 
         //If no path return null
         //If start and end vertex are equal, return path with one vertex and cost of 0
@@ -205,6 +210,65 @@ public class MyGraph implements Graph {
          */
 
 
+        /////////////
+
+        //Unknown vertices
+        Set<Vertex> unknown = new HashSet<>();
+
+        //Set infinity and false
+        for(Vertex v : map.keySet()) {
+            v.setCost(Integer.MAX_VALUE);
+            v.setKnown(false);
+            unknown.add(v);
+        }
+        a.setCost(0);
+
+        //Edges
+        //System.out.println(map.values().toString());
+        Set<Set<Edge>> edges = new HashSet<>();
+        for(Set<Edge> e : map.values()) {
+            edges.add(e);
+        }
+
+        while(!unknown.isEmpty()) {
+
+
+            //Find vertex with lowest cost
+            int distance = Integer.MAX_VALUE;
+            Vertex current = a;
+
+            for(Vertex v : unknown) {
+                //System.out.println("d: " + distance + " cost: " + v.getCost());
+                if(distance > v.getCost()) {
+                    distance = v.getCost();
+                    current = v;
+                }
+            }
+
+            //Remove from unknown
+            unknown.remove(current);
+            //System.out.println(current.toString());
+
+            for(Set<Edge> e : edges) {
+                if(e.contains(current.getLabel())) {
+                    System.out.println("LABEL : " + current.getLabel());
+                }
+            }
+        }
+
+
+
+        return null;
+
+    }
+
+
+
+
+        ////////////
+
+
+        /*
         //Graph = map
         Vertex current = a;
         Vertex tempKey = current;
@@ -253,6 +317,7 @@ public class MyGraph implements Graph {
                 }
             }
         }
+        /*
 
         /*
         while(not all nodes are known) {
@@ -297,8 +362,10 @@ public class MyGraph implements Graph {
         }
         */
 
+        /*
 
         return null;
 	}
+	*/
 
 }
