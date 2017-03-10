@@ -212,6 +212,9 @@ public class MyGraph implements Graph {
 
         /////////////
 
+        //Known vertices
+        Set<Vertex> known = new HashSet<>();
+
         //Unknown vertices
         Set<Vertex> unknown = new HashSet<>();
 
@@ -258,20 +261,33 @@ public class MyGraph implements Graph {
             //System.out.println(current.toString());
 
             //Find shortest path from current
+            int temp = Integer.MAX_VALUE;
             for(Edge e : edges) {
-                int temp = Integer.MAX_VALUE;
                 System.out.println("Label: " + current.getLabel());
                 System.out.println("temp source: " + e.getSource());
                 System.out.println();
 
                 //Check for correct source
                 if(e.getSource().toString().equals(current.getLabel())) {
-                    //Check weight
+                    //Get shortest weight
                     if(e.getWeight() < temp) {
                         temp = e.getWeight();
+                        //System.out.println("weight: " + temp);
                     }
                 }
+                //Set cost of current vertex
+                System.out.println("current cost: " + current.getCost());
+                current.setCost(temp);
             }
+
+            //Add vertex to known
+            known.add(current);
+
+            //Check correct cost
+            for(Vertex v : known) {
+                System.out.println(v.toString() + " " + v.getCost());
+            }
+
         }
 
 
