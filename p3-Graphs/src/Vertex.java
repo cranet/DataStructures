@@ -48,7 +48,7 @@ public class Vertex {
     /**
      * @return Known value
      */
-    public boolean getKnown() {
+    public boolean isKnown() {
         return known;
     }
 

@@ -1,8 +1,6 @@
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
@@ -233,91 +231,95 @@ public class MyGraph implements Graph {
 //            unknown.add(v);
 //        }
 
-        //Set source cost to zero
-        a.setCost(0);
+
 
         //Edges
         //System.out.println(map.values().toString());
-        Set<Edge> edges = new HashSet<>();
-        //List<Edge> edges = new ArrayList<>();
-        for(Set<Edge> setE : map.values()) {
-            for(Edge e : setE) {
-                edges.add(e);
-            }
-        }
+//        Set<Edge> edges = new HashSet<>();
+//        //List<Edge> edges = new ArrayList<>();
+//        for(Set<Edge> setE : map.values()) {
+//            for(Edge e : setE) {
+//                edges.add(e);
+//            }
+//        }
 
 
-        System.out.println(edges.toString());
+       // System.out.println(edges.toString());
 
 
-        //Go through all vertices
+        //Set source cost to zero
+        a.setCost(0);
         Vertex current = a;
+        int i = 0;
+        while(!current.equals(b)) {
 
-        while(!unknown.isEmpty()) {
-
-            System.out.println("current: " + current.toString());
-            System.out.println("current cost: " + current.getCost());
+            //System.out.println("current: " + current.toString());
+            //System.out.println("current cost: " + current.getCost());
 
 
             //Find vertex with lowest cost
             int tempCost = Integer.MAX_VALUE;
 
-
-            for(Vertex v : unknown) {
-                //System.out.println("d: " + distance + " cost: " + v.getCost());
-                if(v.getCost() < tempCost) {
+            for(Vertex v : vertMap.values()) {
+                //System.out.println("vlabel: " + v.getLabel() + " cost: " + v.getCost());
+                if(v.getCost() < tempCost && !v.isKnown()) {
                     tempCost = v.getCost();
                     current = v;
                 }
             }
 
-            //Remove from unknown
-            known.add(current);
-            unknown.remove(current);
+            System.out.println("current: " + current.toString());
+            System.out.println("current cost: " + current.getCost());
+
+            //Set known
+            //current.setKnown(true);
+            vertMap.get(current.getLabel()).setKnown(true);
+            //known.add(current);
+            //unknown.remove(current);
             //System.out.println(current.toString());
 
             //Find shortest path from current
-            int temp = Integer.MAX_VALUE;
-            for(Edge e : edges) {
-
-//                System.out.println("Label: " + current.getLabel());
-//                System.out.println("temp source: " + e.getSource());
-//                System.out.println();
+            //int temp = Integer.MAX_VALUE;
+            for(Edge e : edgeMap.get(current.getLabel())) {
+                //System.out.println(e.toString());
 
                 //Check for correct source
                 //if(e.getSource().toString().equals(current.getLabel())) {
-                if(e.getSource().equals(current)) {
+                //if(e.getSource().equals(current)) {
 
-                    System.out.println("TRUE");
 
-                    //Setting cost if less than previous cost
-                    if(e.getDestination().getCost() > current.getCost() + e.getWeight()) {
+                //Setting cost if less than previous cost
+//                if(e.getDestination().getCost() > current.getCost() + e.getWeight()) {
+//
+//                    e.getDestination().setCost(current.getCost() + e.getWeight());
+//                }
 
-                        e.getDestination().setCost(current.getCost() + e.getWeight());
-                    }
+                if(vertMap.get(e.getDestination().getLabel()).getCost() > current.getCost() + e.getWeight()) {
+                    //System.out.println("before cost: " + vertMap.get(e.getDestination().getLabel()).getCost());
+                    vertMap.get(e.getDestination().getLabel()).setCost(current.getCost() + e.getWeight());
+                    //System.out.println("after cost: " + vertMap.get(e.getDestination().getLabel()).getCost());
+                }
+
                     //Get shortest weight
 //                    if(e.getWeight() < temp) {
 //                        temp = e.getWeight();
 //                        //System.out.println("weight: " + temp);
 //                    }
-                }
+                //}
                 //Set cost of current vertex
-                System.out.println("current cost: " + current.getCost());
                 //current.setCost(temp);
             }
 
             //Add vertex to known
             //known.add(current);
 
-            //Check correct cost
-            for(Vertex v : known) {
-                System.out.println(v.toString() + " " + v.getCost());
-            }
+            i++;
+
 
         }
 
 
-
+        //REMOVE
         return null;
 
     }
@@ -341,8 +343,8 @@ public class MyGraph implements Graph {
 
             int tempCost = Integer.MAX_VALUE;
             for(Map.Entry<Vertex, Set<Edge>> entry : map.entrySet()) {
-                System.out.println(entry.getKey() + " " + entry.getKey().getKnown());
-                if (entry.getKey().getCost() < tempCost && !entry.getKey().getKnown()) {
+                System.out.println(entry.getKey() + " " + entry.getKey().isKnown());
+                if (entry.getKey().getCost() < tempCost && !entry.getKey().isKnown()) {
                     tempCost = entry.getKey().getCost();
                     current = entry.getKey();
                     //entry.se
@@ -363,7 +365,7 @@ public class MyGraph implements Graph {
 
             for(Edge e : map.get(current)) {
                 //System.out.println(e.getSource() + " " + e.getDestination());
-                if(!e.getDestination().getKnown()) {
+                if(!e.getDestination().isKnown()) {
 
                     if(current.getCost() + e.getWeight() < e.getDestination().getCost()) {
 
@@ -405,7 +407,7 @@ public class MyGraph implements Graph {
         temp.add(a);
 
         for(Map.Entry<Vertex, Set<Edge>> entry : map.entrySet()) {
-            while(!entry.getKey().getKnown()) {
+            while(!entry.getKey().isKnown()) {
                 System.out.println("entry value" + entry.getValue());
                 Edge nextNode = null;
                 int weight = Integer.MAX_VALUE;
