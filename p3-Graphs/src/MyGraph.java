@@ -86,6 +86,7 @@ public class MyGraph implements Graph {
             vertMap.put(v.getLabel(), v);
             edgeMap.put(v.getLabel(), edges);
         }
+        System.out.println(map.toString());
     }
 
 	/**
@@ -204,6 +205,8 @@ public class MyGraph implements Graph {
                 }
             }
         }
+        System.out.println("current: " + current.toString());
+        System.out.println("current cost: " + current.getCost());
         //REMOVE
         return null;
     }
