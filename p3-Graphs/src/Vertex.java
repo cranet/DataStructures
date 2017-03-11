@@ -7,6 +7,7 @@ public class Vertex {
 	private Integer cost; //Cost for Dijkstra
     private boolean known; //Known flag for Dijkstra
 
+
 	/**
 	 * Construct a new vertex
      * Sets cost to infinity and known to false

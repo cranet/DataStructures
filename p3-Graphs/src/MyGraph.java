@@ -72,7 +72,7 @@ public class MyGraph implements Graph {
      * Builds the graph using a HashMap
      * Keys = Vertices, Values = HashSet of connected edges
      *
-     * Builds two extra separate HashMaps (vertMap and edgeMap) for use with Djikstra
+     * Builds two extra separate HashMaps (vertMap and edgeMap) for use with Dijkstra
      */
     private void buildGraph() {
         for(Vertex v : vertex) {
@@ -200,14 +200,29 @@ public class MyGraph implements Graph {
             for(Edge e : edgeMap.get(current.getLabel())) {
 
                 //If destination cost is greater than current cost, set cost to current cost + edge weight
-                if(vertMap.get(e.getDestination().getLabel()).getCost() > current.getCost() + e.getWeight()) {
-                    vertMap.get(e.getDestination().getLabel()).setCost(current.getCost() + e.getWeight());
+                int destinationCost = vertMap.get(e.getDestination().getLabel()).getCost();
+                int edgeWeight = e.getWeight();
+                int currentCost = current.getCost();
+                if(destinationCost > edgeWeight + currentCost) {
+                    vertMap.get(e.getDestination().getLabel()).setCost(edgeWeight + currentCost);
                 }
             }
         }
         System.out.println("current: " + current.toString());
         System.out.println("current cost: " + current.getCost());
+
+        resetVertices();
         //REMOVE
         return null;
+    }
+
+    /**
+     * Resets all vertex costs to infinity and known to false
+     */
+    private void resetVertices() {
+	    for(Vertex v : vertMap.values()) {
+	        v.setCost(Integer.MAX_VALUE);
+	        v.setKnown(false);
+        }
     }
 }
