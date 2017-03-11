@@ -185,6 +185,7 @@ public class MyGraph implements Graph {
 
         //Set source cost to zero
         a.setCost(0);
+        vertMap.get(a.getLabel()).setCost(0); //Prevent no path loop
         vertMap.get(b.getLabel()).setCost(Integer.MAX_VALUE - 1); //Prevent no path loop
         Vertex current = a;
 
