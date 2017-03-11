@@ -6,6 +6,7 @@ public class Vertex {
 	private String label;
 	private Integer cost; //Cost for Dijkstra
     private boolean known; //Known flag for Dijkstra
+    private Vertex previousVertex; //Previous connected vertex
 
 
 	/**
@@ -21,6 +22,7 @@ public class Vertex {
 		this.label = label;
 		cost = Integer.MAX_VALUE;
 		known = false;
+		previousVertex = null;
 	}
 
     /**
@@ -51,6 +53,21 @@ public class Vertex {
      */
     public boolean isKnown() {
         return known;
+    }
+
+    /**
+     * Set the previous vertex
+     * @param v Previous vertex
+     */
+    public void setPreviousVertex(Vertex v) {
+        previousVertex = v;
+    }
+
+    /**
+     * @return Previous vertex
+     */
+    public Vertex getPreviousVertex() {
+        return previousVertex;
     }
 
 	/**
