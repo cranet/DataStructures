@@ -36,8 +36,7 @@ public class FindPaths {
 				System.exit(1);
 			}
 			
-			// YOUR CODE HERE: call shortestPath and print
-			// out the result
+			// YOUR CODE HERE: call shortestPath and print out the result
             g.shortestPath(a, b);
 		}
 	}

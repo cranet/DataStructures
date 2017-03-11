@@ -1,4 +1,11 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Set;
+import java.util.Stack;
 
 /**
  * A representation of a graph. Assumes that we do not have negative cost edges
@@ -175,8 +182,8 @@ public class MyGraph implements Graph {
 
         //Set source cost to zero
         a.setCost(0);
+        b.setCost(Integer.MAX_VALUE - 1); //Prevent no path loop
         Vertex current = a;
-        //current.setPreviousVertex(current);
 
         //Iterate until target (b) is found
         while(!current.equals(b)) {
@@ -186,16 +193,10 @@ public class MyGraph implements Graph {
 
             for(Vertex v : vertMap.values()) {
                 if(v.getCost() < tempCost && !v.isKnown()) {
-
-                    //System.out.println("current being set: " + current);
                     tempCost = v.getCost();
                     current = v;
                 }
             }
-
-            //next.setPreviousVertex(current);
-
-            //System.out.println("current set: " + current + " Route: " + current.getPreviousVertex());
 
             //Set known vertex
             vertMap.get(current.getLabel()).setKnown(true);
@@ -209,10 +210,8 @@ public class MyGraph implements Graph {
                 int currentCost = current.getCost();
 
                 if(destination.getCost() > edgeWeight + currentCost) {
-
                     destination.setCost(edgeWeight + currentCost);
-                    destination.setPreviousVertex(current);
-
+                    destination.setPreviousVertex(current); //Set previous vertex
                 }
             }
         }
@@ -220,37 +219,47 @@ public class MyGraph implements Graph {
         //System.out.println("current cost: " + current.getCost());
 
         //Create path
-        //Vertex v = vertMap.get(curr);
         Path p = new Path(buildPath(a, current), current.getCost());
-        //System.out.println(p.toString());
+        System.out.print(" cost: " + current.getCost());
 
         //Reset vertices
         resetVertices();
-        return p;
+
+        //Return null if floating vertex
+        if(b.getPreviousVertex().equals(null)) {
+            System.out.println("nllnullnull");
+            return null;
+        } else {
+            return p;
+        }
     }
 
     /**
      * Builds the path to be returned by shortestPath
      *
-     * @param v Target vertex
+     * @param start Front vertex
+     * @param end Vertex to start building path
      * @return List of vertices
      */
     private List<Vertex> buildPath(Vertex start, Vertex end) {
 
-        List<Vertex> pathList= new ArrayList<>();
+        //Fields
         Vertex tempRoute = end;
-        //int i = 0;
+        Stack<Vertex> temp = new Stack<>();
+        List<Vertex> pathList= new ArrayList<>();
 
+        //Build path into stack
 	    while(!tempRoute.equals(start)) {
-
-	        pathList.add(tempRoute);
+	        temp.add(tempRoute);
 	        tempRoute = tempRoute.getPreviousVertex();
-            //System.out.println("path: " + tempRoute);
         }
+        temp.add(tempRoute);
 
-        pathList.add(tempRoute);
+	    //Add from stack to list (proper order)
+	    while(!temp.isEmpty()) {
+	        pathList.add(temp.pop());
+        }
         System.out.println(pathList);
-
         return pathList;
     }
 
