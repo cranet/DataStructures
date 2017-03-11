@@ -1,5 +1,10 @@
 /**
  * Representation of a graph vertex
+ *
+ * Modified for Cost, Known, and Previous Vertex by:
+ * @author Todd Crane (cranet@uw.edu)
+ * @author Caleb Smith (caleb447@uw.edu)
+ * @version 3/10/2017.
  */
 public class Vertex {
 	// label attached to this vertex
@@ -13,8 +18,7 @@ public class Vertex {
 	 * Construct a new vertex
      * Sets cost to infinity and known to false
 	 * 
-	 * @param label
-	 *            the label attached to this vertex
+	 * @param label the label attached to this vertex
 	 */
 	public Vertex(String label) {
 		if (label == null)

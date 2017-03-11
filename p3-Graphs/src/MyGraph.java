@@ -10,6 +10,10 @@ import java.util.Stack;
 /**
  * A representation of a graph. Assumes that we do not have negative cost edges
  * in the graph.
+ *
+ * @author Todd Crane (cranet@uw.edu)
+ * @author Caleb Smith (caleb447@uw.edu)
+ * @version 3/10/2017.
  */
 public class MyGraph implements Graph {
 
@@ -47,6 +51,10 @@ public class MyGraph implements Graph {
      * Checks that all edges connect to vertices in the graph
      * Checks for negative edge weights
      * Checks for repeated directed edges with different weights
+     *
+     * @throws NoSuchElementException if an edge doesn't connect to an existing vertex
+     * @throws IllegalArgumentException if an edge has a negative weight
+     * @throws IllegalArgumentException if same directed edges have different weights
      */
 	private void checkEdges() {
         for(Edge e : edge) {
@@ -123,6 +131,9 @@ public class MyGraph implements Graph {
 	 */
 	@Override
 	public Collection<Vertex> adjacentVertices(Vertex v) {
+	    //Check for null
+        if(v == null) throw new IllegalArgumentException();
+
         Collection<Vertex> temp = new HashSet<>();
 
         for(Edge e : edge) {
@@ -145,6 +156,9 @@ public class MyGraph implements Graph {
 	 */
 	@Override
 	public int edgeCost(Vertex a, Vertex b) {
+	    //Check for null
+        if(a == null || b == null) throw new IllegalArgumentException();
+
         for(Edge e : edge) {
             if(e.getSource().equals(a) && e.getDestination().equals(b)) {
                 return e.getWeight();
@@ -166,6 +180,8 @@ public class MyGraph implements Graph {
 	 * @throws IllegalArgumentException if a or b does not exist.
 	 */
 	public Path shortestPath(Vertex a, Vertex b) {
+        //Check for null
+        if(a == null || b == null) throw new IllegalArgumentException();
 
         //Set source cost to zero
         a.setCost(0);
