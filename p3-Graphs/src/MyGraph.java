@@ -203,28 +203,21 @@ public class MyGraph implements Graph {
             }
         }
 
-        //Return null if floating vertex
-        if(current.getPreviousVertex() == null) {
-            if(a.equals(b)) {
-                Path p = new Path(buildPath(a, current), current.getCost());
-                System.out.print(" cost: " + current.getCost() + "\n");
-                resetVertices();
-                return p;
-            } else {
-                //Reset vertices
-                resetVertices();
-                return null;
-            }
-
-        } else {
-            //Build path
+        //Print required prompt
+        System.out.println("Shortest path from " + a.getLabel() + " to " + b.getLabel() + ":");
+        //If path exists
+        if(current.getPreviousVertex() != null || a.equals(b)) {
             Path p = new Path(buildPath(a, current), current.getCost());
-            System.out.print(" cost: " + current.getCost() + "\n");
+            System.out.println(current.getCost());
 
             //Reset vertices
             resetVertices();
-
             return p;
+        } else {
+            //Reset vertices
+            resetVertices();
+            System.out.println("does not exist");
+            return null;
         }
     }
 
@@ -253,7 +246,7 @@ public class MyGraph implements Graph {
 	    while(!temp.isEmpty()) {
 	        pathList.add(temp.pop());
         }
-        System.out.print(pathList);
+        System.out.println(pathList);
         return pathList;
     }
 
