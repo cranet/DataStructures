@@ -185,7 +185,7 @@ public class MyGraph implements Graph {
 
         //Set source cost to zero
         a.setCost(0);
-        b.setCost(Integer.MAX_VALUE - 1); //Prevent no path loop
+        vertMap.get(b.getLabel()).setCost(Integer.MAX_VALUE - 1); //Prevent no path loop
         Vertex current = a;
 
         //Iterate until target (b) is found
@@ -195,6 +195,7 @@ public class MyGraph implements Graph {
             int tempCost = Integer.MAX_VALUE;
 
             for(Vertex v : vertMap.values()) {
+
                 if(v.getCost() < tempCost && !v.isKnown()) {
                     tempCost = v.getCost();
                     current = v;

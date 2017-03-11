@@ -16,35 +16,45 @@ public class TestGraph {
     public static void main (String[] args) {
 
         //Check for unconnected (floating) vertex
-        floatVertex();
+        System.out.println("Test 1 \n");
+        //floatVertex();
         MyGraph g1 = new MyGraph(v, e);
+        Vertex a = new Vertex("A");
+        Vertex c = new Vertex("C");
+        g1.shortestPath(a, c);
         v.clear();
         e.clear();
 
         //Check that all edges connect to existing vertices
+        System.out.println("Test 2 \n");
         //existVertex();
         MyGraph g2 = new MyGraph(v, e);
         v.clear();
         e.clear();
 
         //Check for negative weights
+        System.out.println("Test 3 \n");
         //negativeWeight();
         MyGraph g3 = new MyGraph(v, e);
         v.clear();
         e.clear();
 
         //Check for repeated directed edges with different weights
+        System.out.println("Test 4 \n");
         //diffWeight();
         MyGraph g4 = new MyGraph(v, e);
         v.clear();
         e.clear();
 
-        //Check for null vertex (adjacentVertices method)
+        //Check for null vertex (adjacentVertices method and edgeCost method)
+        System.out.println("Test 5 \n");
         //nullVertex();
         MyGraph g5 = new MyGraph(v, e);
+        for(Vertex temp : v) {
+            g5.adjacentVertices(temp);
+        }
         v.clear();
         e.clear();
-
     }
 
     //Check for unconnected (floating) vertex
@@ -99,7 +109,7 @@ public class TestGraph {
 
     //Check for repeated directed edges with different weights
     private static void diffWeight() {
-        System.out.println("Different Directed Edges w/ Different Weights\n");
+        System.out.println("Repeated Directed Edges w/ Different Weights\n");
 
         Vertex A = new Vertex("A");
         Vertex B = new Vertex("B");
