@@ -183,14 +183,19 @@ public class MyGraph implements Graph {
 
             //Find vertex with lowest cost, set route, set current cost
             int tempCost = Integer.MAX_VALUE;
+
             for(Vertex v : vertMap.values()) {
                 if(v.getCost() < tempCost && !v.isKnown()) {
-                    System.out.println("current being set: " + current);
-                    v.setPreviousVertex(current);
+
+                    //System.out.println("current being set: " + current);
                     tempCost = v.getCost();
                     current = v;
                 }
             }
+
+            //next.setPreviousVertex(current);
+
+            //System.out.println("current set: " + current + " Route: " + current.getPreviousVertex());
 
             //Set known vertex
             vertMap.get(current.getLabel()).setKnown(true);
@@ -199,12 +204,15 @@ public class MyGraph implements Graph {
             for(Edge e : edgeMap.get(current.getLabel())) {
 
                 //If destination cost is greater than current cost, set cost to current cost + edge weight
-                int destinationCost = vertMap.get(e.getDestination().getLabel()).getCost();
+                Vertex destination = vertMap.get(e.getDestination().getLabel());
                 int edgeWeight = e.getWeight();
                 int currentCost = current.getCost();
 
-                if(destinationCost > edgeWeight + currentCost) {
-                    vertMap.get(e.getDestination().getLabel()).setCost(edgeWeight + currentCost);
+                if(destination.getCost() > edgeWeight + currentCost) {
+
+                    destination.setCost(edgeWeight + currentCost);
+                    destination.setPreviousVertex(current);
+
                 }
             }
         }
@@ -214,7 +222,7 @@ public class MyGraph implements Graph {
         //Create path
         //Vertex v = vertMap.get(curr);
         Path p = new Path(buildPath(a, current), current.getCost());
-        System.out.println(p.toString());
+        //System.out.println(p.toString());
 
         //Reset vertices
         resetVertices();
@@ -228,13 +236,22 @@ public class MyGraph implements Graph {
      * @return List of vertices
      */
     private List<Vertex> buildPath(Vertex start, Vertex end) {
-	    List<Vertex> tempRoute = new ArrayList<>();
-	    while(end.getLabel() != start.getLabel()) {
-            tempRoute.add(end);
-	        end = end.getPreviousVertex();
-            System.out.println("path: " + end.getLabel());
+
+        List<Vertex> pathList= new ArrayList<>();
+        Vertex tempRoute = end;
+        //int i = 0;
+
+	    while(!tempRoute.equals(start)) {
+
+	        pathList.add(tempRoute);
+	        tempRoute = tempRoute.getPreviousVertex();
+            //System.out.println("path: " + tempRoute);
         }
-	    return tempRoute;
+
+        pathList.add(tempRoute);
+        System.out.println(pathList);
+
+        return pathList;
     }
 
     /**
