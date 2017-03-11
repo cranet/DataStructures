@@ -167,19 +167,6 @@ public class MyGraph implements Graph {
 	 */
 	public Path shortestPath(Vertex a, Vertex b) {
 
-        // YOUR CODE HERE (you might comment this out this method while doing
-        // Part 1)
-
-        //If no path return null
-        //If start and end vertex are equal, return path with one vertex and cost of 0
-        /*
-        Otherwise, the path will contain at least two vertices -- the start and end vertices and any
-        other vertices along the lowest-cost path. The vertices should be in the order they
-        appear on the path.
-         */
-
-        /////////////
-
         //Set source cost to zero
         a.setCost(0);
         b.setCost(Integer.MAX_VALUE - 1); //Prevent no path loop
@@ -215,21 +202,28 @@ public class MyGraph implements Graph {
                 }
             }
         }
-        //System.out.println("current: " + current.toString());
-        //System.out.println("current cost: " + current.getCost());
-
-        //Create path
-        Path p = new Path(buildPath(a, current), current.getCost());
-        System.out.print(" cost: " + current.getCost());
-
-        //Reset vertices
-        resetVertices();
 
         //Return null if floating vertex
-        if(b.getPreviousVertex().equals(null)) {
-            System.out.println("nllnullnull");
-            return null;
+        if(current.getPreviousVertex() == null) {
+            if(a.equals(b)) {
+                Path p = new Path(buildPath(a, current), current.getCost());
+                System.out.print(" cost: " + current.getCost() + "\n");
+                resetVertices();
+                return p;
+            } else {
+                //Reset vertices
+                resetVertices();
+                return null;
+            }
+
         } else {
+            //Build path
+            Path p = new Path(buildPath(a, current), current.getCost());
+            System.out.print(" cost: " + current.getCost() + "\n");
+
+            //Reset vertices
+            resetVertices();
+
             return p;
         }
     }
@@ -259,7 +253,7 @@ public class MyGraph implements Graph {
 	    while(!temp.isEmpty()) {
 	        pathList.add(temp.pop());
         }
-        System.out.println(pathList);
+        System.out.print(pathList);
         return pathList;
     }
 
